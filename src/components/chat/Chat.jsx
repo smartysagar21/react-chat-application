@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import "./chat.css";
 
 const Chat = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
@@ -38,6 +44,10 @@ const Chat = () => {
 
         <div className="message own">
           <div className="texts">
+            <img
+              src="https://images.pexels.com/photos/17806538/pexels-photo-17806538/free-photo-of-woman-with-tousled-hair.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt=""
+            />
             <p>The quick brown fox jumps over a lazy dog.</p>
             <span>1 min ago</span>
           </div>
@@ -72,6 +82,7 @@ const Chat = () => {
             <span>1 min ago</span>
           </div>
         </div>
+        <div ref={endRef}></div>
       </div>
       <div className="bottom">
         <div className="icons">
